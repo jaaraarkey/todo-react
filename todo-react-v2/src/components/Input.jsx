@@ -1,20 +1,20 @@
 import React, { useState } from "react";
 
 const Input = () => {
-  const [inputValue, setInputValue] = useState("");
+  const [task, setTask] = useState("");
 
   const handleChange = (event) => {
-    setInputValue(event.target.value);
+    setTask(event.target.value);
   };
 
   return (
     <>
       <input
         type="text"
-        value={inputValue} // Value from state
+        value={task} // Value from state
         onChange={handleChange}
       />
-      The typed value is {inputValue}
+      The typed value is {task}
     </>
   );
 };

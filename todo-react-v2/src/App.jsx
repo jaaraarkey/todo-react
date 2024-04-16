@@ -1,37 +1,79 @@
-import React, { useState } from "react";
+/* import React, { useState } from "react";
 import "./App.css";
 
+// let nextId = 0;
 function App() {
-  const [tasks, setTasks] = useState([]);
-  const [inputValue, setInputValue] = useState("");
+  const [task, setTask] = useState([]);
 
-  const handleChange = (event) => {
-    setInputValue(event.target.value);
-  };
-  const displayValue = () => {
-    console.log(inputValue);
+  const submitTask = (e) => {
+    e.preventDefault();
+    setTask([...task, e.target[0].value]);
   };
 
   return (
     <>
-      <h1 className="title">My todo list</h1>
-      <p>todo`s:</p>
-      <input
-        type="text"
-        value={inputValue} // Value from state
-        onChange={handleChange}
-      />
-      <button onClick={() => displayValue()}> Add task! </button>
-      {tasks.map((task, index) => {
-        return (
-          <>
-            <li>
-              <input type="checkbox" key={index} />
-              {task}
-            </li>
-          </>
-        );
-      })}
+      <h1>My todo list</h1>
+      <form onSubmit={(e) => submitTask(e)} action="">
+        <input type="text" />
+        <button>Add Task!</button>
+      </form>
+      <ul>
+        {task.map((myTask, index) => (
+          <li key={index}>
+            <input type="checkbox" />
+            {myTask}
+          </li>
+        ))}
+      </ul>
+    </>
+  );
+}
+
+export default App;
+ */
+import React, { useState } from "react";
+import "./App.css";
+
+function App() {
+  const [task, setTask] = useState(""); // State for the input field
+  const [tasks, setTasks] = useState([]); // State for the list of tasks
+
+  const handleChange = (event) => {
+    setTask(event.target.value);
+  };
+
+  const addTask = () => {
+    if (task.trim() !== "") {
+      // Only add non-empty tasks
+      setTasks([...tasks, task]);
+      setTask(""); // Clear the input field after adding the task
+    }
+  };
+
+  return (
+    <>
+      <h1 className="title" style={{}}>
+        My todo list
+      </h1>
+      <p>todos:</p>
+      <input type="text" value={task} onChange={handleChange} />
+      <button
+        onClick={addTask}
+        style={{
+          margin: "0 1rem",
+        }}
+      >
+        {" "}
+        Add task!{" "}
+      </button>
+      <ul>
+        {tasks.map((taskItem, index) => (
+          <li key={index}>
+            <input type="checkbox" />
+            {taskItem}
+          </li>
+        ))}
+      </ul>
     </>
   );
 }
